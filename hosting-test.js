@@ -49,6 +49,44 @@
     for(const text of [`${entry.source} / ${entry.work}`,fmt(entry.firstFrameMs),`${entry.stalls} / ${fmt(entry.stallMs)}`,entry.resolution||'单独观察',fmt(entry.seekMs)]){const td=document.createElement('td');td.textContent=text;tr.append(td);}
     q('#hosting-table tbody').append(tr);
   };
+  let batching=false;
+  const batchButton=document.createElement('button');
+  batchButton.textContent='自动对比本来源（两轮）';
+  q('#hosting-record').before(batchButton);
+  function waitUntil(check, timeout=20000) {
+    return new Promise((resolve,reject)=>{
+      const started=performance.now();
+      const timer=setInterval(()=>{
+        if(!batching){clearInterval(timer);reject(new Error('测试已停止'));return;}
+        if(check()){clearInterval(timer);resolve();return;}
+        if(performance.now()-started>timeout){clearInterval(timer);reject(new Error('等待播放超时'));}
+      },100);
+    });
+  }
+  batchButton.onclick=async()=>{
+    if(batching){batching=false;close();return;}
+    if(source==='bilibili'){q('#hosting-status').textContent='B站跨站播放器请单独观察；自动测量仅适用于MP4。';return;}
+    if(source==='r2'&&!base){q('#hosting-status').textContent='请先完成R2公开地址配置。';return;}
+    batching=true;batchButton.textContent='停止自动测试';
+    try {
+      for(let round=1;round<=2&&batching;round++)for(const p of [9,1,4,3]){
+        if(!batching)break;
+        q('#hosting-work').value=String(p);q('#hosting-play').click();
+        const run=current;run.round=round;
+        try {
+          await waitUntil(()=>run.firstFrameMs!==null||run.error);
+          if(run.error)throw new Error(run.error);
+          const v=document.querySelector('.modal[style*="flex"] video');
+          await waitUntil(()=>v.currentTime>=Math.min(8,v.duration/3)||v.ended);
+          q('#hosting-seek').click();
+          await waitUntil(()=>run.seekMs!==null);
+          const after=v.currentTime;
+          await waitUntil(()=>v.currentTime>=Math.min(after+5,v.duration-0.15)||v.ended);
+        } catch(error) {run.error=error.message;}
+        run.sampleComplete=true;q('#hosting-record').click();close();
+      }
+    } finally {batching=false;batchButton.textContent='自动对比本来源（两轮）';update();}
+  };
   function report() {return JSON.stringify({page:location.href,userAgent:navigator.userAgent,connection:navigator.connection?{effectiveType:navigator.connection.effectiveType,downlink:navigator.connection.downlink,rtt:navigator.connection.rtt}:null,baseline:'Unchanged Bilibili iframe URL from current portfolio; source MP4 files copied byte-for-byte.',warning:'Bilibili iframe metrics are not measured by this page. MP4 source files may differ from Bilibili uploaded revisions; compare content before quality judgment.',runs,current},null,2);}
   q('#hosting-copy').onclick = async () => {try{await navigator.clipboard.writeText(report());q('#hosting-status').textContent+='\n已复制记录。';}catch{q('#hosting-status').textContent+='\n请使用下载测试记录。';}};
   q('#hosting-download').onclick = () => {const url=URL.createObjectURL(new Blob([report()],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='yaelum-video-test.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
