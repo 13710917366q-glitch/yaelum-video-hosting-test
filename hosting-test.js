@@ -100,6 +100,7 @@
     if(source==='r2'&&!base){frame.remove();run.error='R2尚未配置公开视频地址。';update();return true;}
     const t0=performance.now();
     const video=document.createElement('video'); video.controls=true;video.playsInline=true;video.preload='none';video.dataset.hostingVideo='1';
+    video.muted=params.get('auto')==='1';run.muted=video.muted;
     video.src=source==='github'?new URL(`video/${files[p]}`,location.href).href:`${base}/${files[p]}`;
     let first=false,waiting=null,seekingAt=null,wasPlaying=false,seeking=false;
     function log(type){run.events.push({type,ms:Math.round(performance.now()-t0),at:Math.round(video.currentTime*1000)/1000});}
@@ -125,4 +126,7 @@
     if(!modalOpen)stopCurrent();
   }).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['src','style']});
   update();
+  if(params.get('auto')==='1' && source!=='bilibili') {
+    document.addEventListener('DOMContentLoaded',()=>batchButton.click(),{once:true});
+  }
 })();
