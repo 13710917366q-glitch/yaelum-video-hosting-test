@@ -1,0 +1,516 @@
+{
+  "page": "http://127.0.0.1:8175/auto-test.html?source=r2&auto=1",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "connection": {
+    "effectiveType": "4g",
+    "downlink": 1,
+    "rtt": 200
+  },
+  "baseline": "Unchanged Bilibili iframe URL from current portfolio; source MP4 files copied byte-for-byte.",
+  "warning": "Bilibili iframe metrics are not measured by this page. MP4 source files may differ from Bilibili uploaded revisions; compare content before quality judgment.",
+  "runs": [
+    {
+      "source": "r2",
+      "work": "Showreel",
+      "file": "intro.mp4",
+      "openedAt": "2026-11-06T07:59:12.621Z",
+      "firstFrameMs": 1313,
+      "playingMs": 1298.699999999255,
+      "resolution": "1920×1080",
+      "stalls": 0,
+      "stallMs": 0,
+      "seekMs": 675.9000000022352,
+      "error": null,
+      "events": [
+        {
+          "type": "waiting",
+          "ms": 10,
+          "at": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "ms": 1256,
+          "at": 0
+        },
+        {
+          "type": "playing",
+          "ms": 1299,
+          "at": 0.001
+        },
+        {
+          "type": "seeking",
+          "ms": 9408,
+          "at": 58.15
+        },
+        {
+          "type": "waiting",
+          "ms": 9408,
+          "at": 58.15
+        },
+        {
+          "type": "seeked",
+          "ms": 10084,
+          "at": 58.15
+        },
+        {
+          "type": "playing",
+          "ms": 10084,
+          "at": 58.15
+        }
+      ],
+      "muted": true,
+      "round": 1,
+      "duration": 96.916667,
+      "firstFrameMethod": "requestVideoFrameCallback",
+      "sampleComplete": true,
+      "recordedAt": "2026-11-06T07:59:27.840Z"
+    },
+    {
+      "source": "r2",
+      "work": "动画曲线",
+      "file": "cover1.mp4",
+      "openedAt": "2026-11-06T07:59:27.846Z",
+      "firstFrameMs": 1203,
+      "playingMs": 576.6000000014901,
+      "resolution": "1920×1080",
+      "stalls": 0,
+      "stallMs": 0,
+      "seekMs": 2004.0999999977648,
+      "error": null,
+      "events": [
+        {
+          "type": "waiting",
+          "ms": 6,
+          "at": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "ms": 543,
+          "at": 0
+        },
+        {
+          "type": "playing",
+          "ms": 577,
+          "at": 0
+        },
+        {
+          "type": "seeking",
+          "ms": 8708,
+          "at": 16.175
+        },
+        {
+          "type": "waiting",
+          "ms": 8708,
+          "at": 16.175
+        },
+        {
+          "type": "seeked",
+          "ms": 10712,
+          "at": 16.175
+        },
+        {
+          "type": "playing",
+          "ms": 10712,
+          "at": 16.175
+        }
+      ],
+      "muted": true,
+      "round": 1,
+      "duration": 26.958333,
+      "firstFrameMethod": "requestVideoFrameCallback",
+      "sampleComplete": true,
+      "recordedAt": "2026-11-06T07:59:43.756Z"
+    },
+    {
+      "source": "r2",
+      "work": "三维元素融合",
+      "file": "cover5.mp4",
+      "openedAt": "2026-11-06T07:59:43.761Z",
+      "firstFrameMs": 810,
+      "playingMs": 401,
+      "resolution": "1920×1080",
+      "stalls": 0,
+      "stallMs": 0,
+      "seekMs": 835.1999999992549,
+      "error": null,
+      "events": [
+        {
+          "type": "waiting",
+          "ms": 3,
+          "at": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "ms": 364,
+          "at": 0
+        },
+        {
+          "type": "playing",
+          "ms": 401,
+          "at": 0
+        },
+        {
+          "type": "seeking",
+          "ms": 8504,
+          "at": 20.84
+        },
+        {
+          "type": "waiting",
+          "ms": 8504,
+          "at": 20.84
+        },
+        {
+          "type": "seeked",
+          "ms": 9339,
+          "at": 20.84
+        },
+        {
+          "type": "playing",
+          "ms": 9339,
+          "at": 20.84
+        }
+      ],
+      "muted": true,
+      "round": 1,
+      "duration": 34.733333,
+      "firstFrameMethod": "requestVideoFrameCallback",
+      "sampleComplete": true,
+      "recordedAt": "2026-11-06T07:59:58.167Z"
+    },
+    {
+      "source": "r2",
+      "work": "MAD 打光",
+      "file": "cover4.mp4",
+      "openedAt": "2026-11-06T07:59:58.172Z",
+      "firstFrameMs": 2470.099999997765,
+      "playingMs": 1734.7999999970198,
+      "resolution": "1920×800",
+      "stalls": 0,
+      "stallMs": 0,
+      "seekMs": 427.80000000074506,
+      "error": null,
+      "events": [
+        {
+          "type": "waiting",
+          "ms": 2,
+          "at": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "ms": 1699,
+          "at": 0
+        },
+        {
+          "type": "playing",
+          "ms": 1735,
+          "at": 0
+        },
+        {
+          "type": "seeking",
+          "ms": 9814,
+          "at": 52.326
+        },
+        {
+          "type": "waiting",
+          "ms": 9815,
+          "at": 52.326
+        },
+        {
+          "type": "seeked",
+          "ms": 10242,
+          "at": 52.327
+        },
+        {
+          "type": "playing",
+          "ms": 10242,
+          "at": 52.327
+        }
+      ],
+      "muted": true,
+      "round": 1,
+      "duration": 87.210667,
+      "firstFrameMethod": "requestVideoFrameCallback",
+      "sampleComplete": true,
+      "recordedAt": "2026-11-06T08:00:13.487Z"
+    },
+    {
+      "source": "r2",
+      "work": "Showreel",
+      "file": "intro.mp4",
+      "openedAt": "2026-11-06T08:00:13.492Z",
+      "firstFrameMs": 1528.300000000745,
+      "playingMs": 782.8000000007451,
+      "resolution": "1920×1080",
+      "stalls": 0,
+      "stallMs": 0,
+      "seekMs": 34.899999998509884,
+      "error": null,
+      "events": [
+        {
+          "type": "waiting",
+          "ms": 5,
+          "at": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "ms": 754,
+          "at": 0
+        },
+        {
+          "type": "playing",
+          "ms": 783,
+          "at": 0
+        },
+        {
+          "type": "seeking",
+          "ms": 8913,
+          "at": 58.15
+        },
+        {
+          "type": "waiting",
+          "ms": 8914,
+          "at": 58.15
+        },
+        {
+          "type": "seeked",
+          "ms": 8948,
+          "at": 58.15
+        },
+        {
+          "type": "playing",
+          "ms": 8948,
+          "at": 58.15
+        }
+      ],
+      "muted": true,
+      "round": 2,
+      "duration": 96.916667,
+      "firstFrameMethod": "requestVideoFrameCallback",
+      "sampleComplete": true,
+      "recordedAt": "2026-11-06T08:00:27.507Z"
+    },
+    {
+      "source": "r2",
+      "work": "动画曲线",
+      "file": "cover1.mp4",
+      "openedAt": "2026-11-06T08:00:27.511Z",
+      "firstFrameMs": 992.4000000022352,
+      "playingMs": 44.70000000298023,
+      "resolution": "1920×1080",
+      "stalls": 0,
+      "stallMs": 0,
+      "seekMs": 16.700000002980232,
+      "error": null,
+      "events": [
+        {
+          "type": "waiting",
+          "ms": 4,
+          "at": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "ms": 14,
+          "at": 0
+        },
+        {
+          "type": "playing",
+          "ms": 45,
+          "at": 0.002
+        },
+        {
+          "type": "seeking",
+          "ms": 8106,
+          "at": 16.175
+        },
+        {
+          "type": "waiting",
+          "ms": 8106,
+          "at": 16.175
+        },
+        {
+          "type": "seeked",
+          "ms": 8122,
+          "at": 16.175
+        },
+        {
+          "type": "playing",
+          "ms": 8122,
+          "at": 16.176
+        }
+      ],
+      "muted": true,
+      "round": 2,
+      "duration": 26.958333,
+      "firstFrameMethod": "requestVideoFrameCallback",
+      "sampleComplete": true,
+      "recordedAt": "2026-11-06T08:00:40.818Z"
+    },
+    {
+      "source": "r2",
+      "work": "三维元素融合",
+      "file": "cover5.mp4",
+      "openedAt": "2026-11-06T08:00:40.823Z",
+      "firstFrameMs": 812.7000000029802,
+      "playingMs": 42.30000000074506,
+      "resolution": "1920×1080",
+      "stalls": 0,
+      "stallMs": 0,
+      "seekMs": 16.600000001490116,
+      "error": null,
+      "events": [
+        {
+          "type": "waiting",
+          "ms": 4,
+          "at": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "ms": 10,
+          "at": 0
+        },
+        {
+          "type": "playing",
+          "ms": 42,
+          "at": 0.001
+        },
+        {
+          "type": "seeking",
+          "ms": 8105,
+          "at": 20.84
+        },
+        {
+          "type": "waiting",
+          "ms": 8105,
+          "at": 20.84
+        },
+        {
+          "type": "seeked",
+          "ms": 8121,
+          "at": 20.84
+        },
+        {
+          "type": "playing",
+          "ms": 8121,
+          "at": 20.84
+        }
+      ],
+      "muted": true,
+      "round": 2,
+      "duration": 34.733333,
+      "firstFrameMethod": "requestVideoFrameCallback",
+      "sampleComplete": true,
+      "recordedAt": "2026-11-06T08:00:54.032Z"
+    },
+    {
+      "source": "r2",
+      "work": "MAD 打光",
+      "file": "cover4.mp4",
+      "openedAt": "2026-11-06T08:00:54.039Z",
+      "firstFrameMs": 646.8000000007451,
+      "playingMs": 43.899999998509884,
+      "resolution": "1920×800",
+      "stalls": 0,
+      "stallMs": 0,
+      "seekMs": 100.40000000223517,
+      "error": null,
+      "events": [
+        {
+          "type": "waiting",
+          "ms": 2,
+          "at": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "ms": 11,
+          "at": 0
+        },
+        {
+          "type": "playing",
+          "ms": 44,
+          "at": 0.002
+        },
+        {
+          "type": "seeking",
+          "ms": 8104,
+          "at": 52.326
+        },
+        {
+          "type": "waiting",
+          "ms": 8104,
+          "at": 52.326
+        },
+        {
+          "type": "seeked",
+          "ms": 8205,
+          "at": 52.327
+        },
+        {
+          "type": "playing",
+          "ms": 8205,
+          "at": 52.327
+        }
+      ],
+      "muted": true,
+      "round": 2,
+      "duration": 87.210667,
+      "firstFrameMethod": "requestVideoFrameCallback",
+      "sampleComplete": true,
+      "recordedAt": "2026-11-06T08:01:07.446Z"
+    }
+  ],
+  "current": {
+    "source": "r2",
+    "work": "MAD 打光",
+    "file": "cover4.mp4",
+    "openedAt": "2026-11-06T08:00:54.039Z",
+    "firstFrameMs": 646.8000000007451,
+    "playingMs": 43.899999998509884,
+    "resolution": "1920×800",
+    "stalls": 0,
+    "stallMs": 0,
+    "seekMs": 100.40000000223517,
+    "error": null,
+    "events": [
+      {
+        "type": "waiting",
+        "ms": 2,
+        "at": 0
+      },
+      {
+        "type": "loadedmetadata",
+        "ms": 11,
+        "at": 0
+      },
+      {
+        "type": "playing",
+        "ms": 44,
+        "at": 0.002
+      },
+      {
+        "type": "seeking",
+        "ms": 8104,
+        "at": 52.326
+      },
+      {
+        "type": "waiting",
+        "ms": 8104,
+        "at": 52.326
+      },
+      {
+        "type": "seeked",
+        "ms": 8205,
+        "at": 52.327
+      },
+      {
+        "type": "playing",
+        "ms": 8205,
+        "at": 52.327
+      }
+    ],
+    "muted": true,
+    "round": 2,
+    "duration": 87.210667,
+    "firstFrameMethod": "requestVideoFrameCallback",
+    "sampleComplete": true
+  }
+}

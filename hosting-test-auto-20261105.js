@@ -30,7 +30,7 @@
     q('#hosting-r2').hidden = source !== 'r2';
     if (!current) {q('#hosting-status').textContent = `当前：${source}。点击作品后开始记录。`; return;}
     const c = current;
-    q('#hosting-status').textContent = c.source === 'bilibili' ? `B站基准 · ${c.work}\n已打开现版外嵌地址；播放器显示及首帧请单独观察。` : c.fallback ? `R2 已切回 B站 · ${c.work}\n${c.fallbackReason}。本次不计为 R2 成功播放。` : `${c.source} · ${c.work}\n首帧 ${fmt(c.firstFrameMs)}；开始播放 ${fmt(c.playingMs)}；缓冲 ${c.stalls}次 / ${fmt(c.stallMs)}\n实际分辨率 ${c.resolution || '待测'}；跳转恢复 ${fmt(c.seekMs)}${c.error ? '\n'+c.error : ''}`;
+    q('#hosting-status').textContent = c.source === 'bilibili' ? `B站基准 · ${c.work}\n已打开现版外嵌地址；播放器显示及首帧请单独观察。` : c.fallback ? `R2 已切到 GitHub 高清备用 · ${c.work}\n${c.fallbackReason}。本次不计为 R2 成功播放。${c.backupError?'\n'+c.backupError:''}` : `${c.source} · ${c.work}\n首帧 ${fmt(c.firstFrameMs)}；开始播放 ${fmt(c.playingMs)}；缓冲 ${c.stalls}次 / ${fmt(c.stallMs)}\n实际分辨率 ${c.resolution || '待测'}；跳转恢复 ${fmt(c.seekMs)}${c.error ? '\n'+c.error : ''}`;
   }
   q('#hosting-source').onchange = e => {close(); source=e.target.value; current=null; const u=new URL(location.href);u.searchParams.set('source',source);history.replaceState(null,'',u);update();};
   q('#hosting-save').onclick = () => {
@@ -51,7 +51,7 @@
     const entry={...current,stallMs:current.stallMs,events:current.events.slice(),recordedAt:new Date().toISOString()};
     runs.push(entry);
     const tr=document.createElement('tr');
-    for(const text of [`${entry.source}${entry.fallback?' → B站':''} / ${entry.work}`,entry.fallback?'回退':fmt(entry.firstFrameMs),`${entry.stalls} / ${fmt(entry.stallMs)}`,entry.resolution||'单独观察',fmt(entry.seekMs)]){const td=document.createElement('td');td.textContent=text;tr.append(td);}
+    for(const text of [`${entry.source}${entry.fallback?' → GitHub':''} / ${entry.work}`,entry.fallback?'回退':fmt(entry.firstFrameMs),`${entry.stalls} / ${fmt(entry.stallMs)}`,entry.resolution||'单独观察',fmt(entry.seekMs)]){const td=document.createElement('td');td.textContent=text;tr.append(td);}
     q('#hosting-table tbody').append(tr);
   };
   let batching=false;
@@ -120,15 +120,22 @@
     video.addEventListener('ended',()=>{endWait();log('ended');update();});
     video.addEventListener('error',()=>{run.error=`播放错误 ${video.error?.code||''}`;log('error');update();});
     frame.replaceWith(video);
-    let fallbackFrame=null;
+    let backup=null,backupGuard=null,backupMessage=null;
     const guard=source==='r2'?globalThis.YaelumVideoFallback(video,reason=>{
-      endWait();run.fallback='bilibili';run.fallbackReason=reason;run.error=reason;log('fallback-bilibili');
+      endWait();run.fallback='github';run.fallbackReason=reason;run.error=reason;log('fallback-github');
       video.pause();video.removeAttribute('src');video.load();
-      fallbackFrame=frame;frame.style.display='block';
-      frame.src=`https://player.bilibili.com/player.html?bvid=BV19KpezdExJ&page=${p}&p=${p}&autoplay=1`;
-      video.replaceWith(frame);update();
+      backup=document.createElement('video');backup.controls=true;backup.playsInline=true;backup.preload='none';backup.muted=video.muted;
+      backup.src=`https://13710917366q-glitch.github.io/yaelum-video-hosting-test/video/${files[p]}`;
+      backupGuard=globalThis.YaelumVideoFallback(backup,()=>{
+        run.backupError='高清备用暂时加载失败，请稍后重新打开作品。';backup.pause();backup.removeAttribute('src');backup.load();
+        backupMessage=document.createElement('p');backupMessage.textContent=run.backupError;backupMessage.style.cssText='color:white;padding:24px';backup.replaceWith(backupMessage);update();
+      });
+      backup.addEventListener('playing',()=>{run.backupPlaying=true;update();});
+      video.replaceWith(backup);
+      backup.play()?.catch(error=>{if(error.name==='NotAllowedError'){backupGuard.blocked();}else backupGuard.failed(error.name);});
+      update();
     }):null;
-    stopCurrent=()=>{guard?.stop();endWait();video.pause();video.removeAttribute('src');video.load();video.remove();if(fallbackFrame){fallbackFrame.removeAttribute('src');fallbackFrame.remove();}stopCurrent=()=>{};};
+    stopCurrent=()=>{guard?.stop();backupGuard?.stop();endWait();video.pause();video.removeAttribute('src');video.load();video.remove();if(backup){backup.pause();backup.removeAttribute('src');backup.load();backup.remove();}backupMessage?.remove();stopCurrent=()=>{};};
     const result=video.play();if(result)result.catch(error=>{if(error.name==='NotAllowedError'){guard?.blocked();run.error='请点击播放器播放';}else if(guard){guard.failed(error.name);}else{run.error=`播放启动失败：${error.name}`;}update();});
     update();
     return true;
