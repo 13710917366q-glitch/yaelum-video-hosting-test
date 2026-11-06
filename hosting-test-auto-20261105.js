@@ -4,7 +4,12 @@
   const labels = {1:'动画曲线',2:'粒子与曲线',3:'MAD 打光',4:'三维元素融合',5:'三维融合二',6:'动画曲线二',7:'音乐展 PV',8:'分镜练习',9:'Showreel'};
   const params = new URLSearchParams(location.search);
   let source = ['bilibili','github','r2'].includes(params.get('source')) ? params.get('source') : 'bilibili';
-  let base = localStorage.getItem('yaelum-r2-base') || '';
+  const validBase = value => {
+    try {const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password&&!u.search&&!u.hash&&!/(^|\.)r2\.dev$|(^|\.)r2\.cloudflarestorage\.com$/i.test(u.hostname);} catch{return false;}
+  };
+  const defaultBase='https://yaelum-video-guard.yaelum-video-guard.workers.dev';
+  let base = localStorage.getItem('yaelum-r2-base') || defaultBase;
+  if (!validBase(base)) base=defaultBase;
   const runs = [];
   let current = null;
   let stopCurrent = () => {};
@@ -13,7 +18,7 @@
   document.head.append(style);
   const panel = document.createElement('details');
   panel.id = 'hosting-panel'; panel.open = true;
-  panel.innerHTML = '<summary>视频托管对比 · 同一作品集页面</summary><div><label>来源 <select id="hosting-source"><option value="bilibili">B站（现版基准）</option><option value="github">GitHub Pages MP4</option><option value="r2">Cloudflare R2 MP4</option></select></label><label>作品 <select id="hosting-work"><option value="9">Showreel · 97秒 / 95MiB</option><option value="1">动画曲线 · 27秒 / 51MiB</option><option value="4">三维元素 · 35秒 / 63MiB</option><option value="3">MAD打光 · 87秒 / 14MiB</option></select></label><button id="hosting-play">打开所选作品</button><button id="hosting-close">关闭视频</button><button id="hosting-seek">跳至60%</button></div><div id="hosting-r2"><label>R2公开地址 <input id="hosting-base" type="url" placeholder="https://video.example.com"></label><button id="hosting-save">保存</button></div><div id="hosting-status" role="status"></div><div><button id="hosting-record">记录本次</button><button id="hosting-copy">复制测试记录</button><button id="hosting-download">下载测试记录</button></div><p class="hosting-note">MP4点击后才设置视频地址；关闭后停止下载。B站跨站播放器的首帧、缓冲和实际分辨率需单独观察，面板不会伪造这些数值。切换来源保留浏览器缓存；冷热缓存及网络条件请分别记录。</p><table id="hosting-table"><thead><tr><th>来源/作品</th><th>首帧</th><th>缓冲</th><th>分辨率</th><th>跳转</th></tr></thead><tbody></tbody></table>';
+  panel.innerHTML = '<summary>视频托管对比 · 同一作品集页面</summary><div><label>来源 <select id="hosting-source"><option value="bilibili">B站（现版基准）</option><option value="github">GitHub Pages MP4</option><option value="r2">Cloudflare R2 MP4</option></select></label><label>作品 <select id="hosting-work"><option value="9">Showreel · 97秒 / 95MiB</option><option value="1">动画曲线 · 27秒 / 51MiB</option><option value="4">三维元素 · 35秒 / 63MiB</option><option value="3">MAD打光 · 87秒 / 14MiB</option></select></label><button id="hosting-play">打开所选作品</button><button id="hosting-close">关闭视频</button><button id="hosting-seek">跳至60%</button></div><div id="hosting-r2"><label>受保护的播放地址 <input id="hosting-base" type="url" placeholder="https://video.example.com"></label><button id="hosting-save">保存</button></div><div id="hosting-status" role="status"></div><div><button id="hosting-record">记录本次</button><button id="hosting-copy">复制测试记录</button><button id="hosting-download">下载测试记录</button></div><p class="hosting-note">MP4点击后才设置视频地址；关闭后停止下载。B站跨站播放器的首帧、缓冲和实际分辨率需单独观察，面板不会伪造这些数值。切换来源保留浏览器缓存；冷热缓存及网络条件请分别记录。</p><table id="hosting-table"><thead><tr><th>来源/作品</th><th>首帧</th><th>缓冲</th><th>分辨率</th><th>跳转</th></tr></thead><tbody></tbody></table>';
   document.body.append(panel);
   const q = s => panel.querySelector(s);
   q('#hosting-source').value = source; q('#hosting-base').value = base;
@@ -25,13 +30,13 @@
     q('#hosting-r2').hidden = source !== 'r2';
     if (!current) {q('#hosting-status').textContent = `当前：${source}。点击作品后开始记录。`; return;}
     const c = current;
-    q('#hosting-status').textContent = c.source === 'bilibili' ? `B站基准 · ${c.work}\n已打开现版外嵌地址；播放器显示及首帧请单独观察。` : `${c.source} · ${c.work}\n首帧 ${fmt(c.firstFrameMs)}；开始播放 ${fmt(c.playingMs)}；缓冲 ${c.stalls}次 / ${fmt(c.stallMs)}\n实际分辨率 ${c.resolution || '待测'}；跳转恢复 ${fmt(c.seekMs)}${c.error ? '\n'+c.error : ''}`;
+    q('#hosting-status').textContent = c.source === 'bilibili' ? `B站基准 · ${c.work}\n已打开现版外嵌地址；播放器显示及首帧请单独观察。` : c.fallback ? `R2 已切回 B站 · ${c.work}\n${c.fallbackReason}。本次不计为 R2 成功播放。` : `${c.source} · ${c.work}\n首帧 ${fmt(c.firstFrameMs)}；开始播放 ${fmt(c.playingMs)}；缓冲 ${c.stalls}次 / ${fmt(c.stallMs)}\n实际分辨率 ${c.resolution || '待测'}；跳转恢复 ${fmt(c.seekMs)}${c.error ? '\n'+c.error : ''}`;
   }
   q('#hosting-source').onchange = e => {close(); source=e.target.value; current=null; const u=new URL(location.href);u.searchParams.set('source',source);history.replaceState(null,'',u);update();};
   q('#hosting-save').onclick = () => {
     const value = q('#hosting-base').value.trim().replace(/\/+$/,'');
-    try { const u=new URL(value); if(u.protocol!=='https:' || u.username || u.password || u.search || u.hash) throw Error('invalid'); base=u.href.replace(/\/+$/,''); localStorage.setItem('yaelum-r2-base',base);current=null;update(); }
-    catch { q('#hosting-status').textContent='请填入HTTPS公开根地址，不含密钥或签名参数。'; }
+    try { if(!validBase(value)) throw Error('invalid'); base=new URL(value).href.replace(/\/+$/,''); localStorage.setItem('yaelum-r2-base',base);current=null;update(); }
+    catch { q('#hosting-status').textContent='请填写受保护的 HTTPS Worker 地址；请勿填 R2 直连地址或密钥。'; }
   };
   q('#hosting-play').onclick = () => {
     close();
@@ -46,7 +51,7 @@
     const entry={...current,stallMs:current.stallMs,events:current.events.slice(),recordedAt:new Date().toISOString()};
     runs.push(entry);
     const tr=document.createElement('tr');
-    for(const text of [`${entry.source} / ${entry.work}`,fmt(entry.firstFrameMs),`${entry.stalls} / ${fmt(entry.stallMs)}`,entry.resolution||'单独观察',fmt(entry.seekMs)]){const td=document.createElement('td');td.textContent=text;tr.append(td);}
+    for(const text of [`${entry.source}${entry.fallback?' → B站':''} / ${entry.work}`,entry.fallback?'回退':fmt(entry.firstFrameMs),`${entry.stalls} / ${fmt(entry.stallMs)}`,entry.resolution||'单独观察',fmt(entry.seekMs)]){const td=document.createElement('td');td.textContent=text;tr.append(td);}
     q('#hosting-table tbody').append(tr);
   };
   let batching=false;
@@ -66,7 +71,7 @@
   batchButton.onclick=async()=>{
     if(batching){batching=false;close();return;}
     if(source==='bilibili'){q('#hosting-status').textContent='B站跨站播放器请单独观察；自动测量仅适用于MP4。';return;}
-    if(source==='r2'&&!base){q('#hosting-status').textContent='请先完成R2公开地址配置。';return;}
+    if(source==='r2'&&!base){q('#hosting-status').textContent='请先完成受保护的播放地址配置。';return;}
     batching=true;batchButton.textContent='停止自动测试';
     try {
       for(let round=1;round<=2&&batching;round++)for(const p of [9,1,4,3]){
@@ -97,7 +102,7 @@
     if(source==='bilibili'){update();return false;}
     const run=current;
     if(!files[p]){run.error='此作品尚未找到对应本地MP4；本次保留B站，不计入MP4对比。';run.source='bilibili';update();return false;}
-    if(source==='r2'&&!base){frame.remove();run.error='R2尚未配置公开视频地址。';update();return true;}
+    if(source==='r2'&&!base){frame.remove();run.error='R2尚未配置受保护的播放地址。';update();return true;}
     const t0=performance.now();
     const video=document.createElement('video'); video.controls=true;video.playsInline=true;video.preload='none';video.dataset.hostingVideo='1';
     video.muted=params.get('auto')==='1';run.muted=video.muted;
@@ -115,8 +120,16 @@
     video.addEventListener('ended',()=>{endWait();log('ended');update();});
     video.addEventListener('error',()=>{run.error=`播放错误 ${video.error?.code||''}`;log('error');update();});
     frame.replaceWith(video);
-    const result=video.play();if(result)result.catch(error=>{run.error=`请点击播放器播放：${error.name}`;update();});
-    stopCurrent=()=>{endWait();video.pause();video.removeAttribute('src');video.load();video.remove();stopCurrent=()=>{};};
+    let fallbackFrame=null;
+    const guard=source==='r2'?globalThis.YaelumVideoFallback(video,reason=>{
+      endWait();run.fallback='bilibili';run.fallbackReason=reason;run.error=reason;log('fallback-bilibili');
+      video.pause();video.removeAttribute('src');video.load();
+      fallbackFrame=frame;frame.style.display='block';
+      frame.src=`https://player.bilibili.com/player.html?bvid=BV19KpezdExJ&page=${p}&p=${p}&autoplay=1`;
+      video.replaceWith(frame);update();
+    }):null;
+    stopCurrent=()=>{guard?.stop();endWait();video.pause();video.removeAttribute('src');video.load();video.remove();if(fallbackFrame){fallbackFrame.removeAttribute('src');fallbackFrame.remove();}stopCurrent=()=>{};};
+    const result=video.play();if(result)result.catch(error=>{if(error.name==='NotAllowedError'){guard?.blocked();run.error='请点击播放器播放';}else if(guard){guard.failed(error.name);}else{run.error=`播放启动失败：${error.name}`;}update();});
     update();
     return true;
   }

@@ -1,0 +1,278 @@
+{
+  "at": "2026-11-06T07:58:13.1379939Z",
+  "base": "https://yaelum-video-guard.yaelum-video-guard.workers.dev",
+  "proxy": "existing local proxy",
+  "passed": true,
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "range": "",
+      "status": 200,
+      "ms": 903,
+      "contentLength": 35,
+      "contentRange": "",
+      "received": 35
+    },
+    {
+      "method": "HEAD",
+      "path": "/cover1.mp4",
+      "range": "",
+      "status": 200,
+      "ms": 224,
+      "contentLength": 53847537,
+      "contentRange": "",
+      "received": 0
+    },
+    {
+      "method": "GET",
+      "path": "/cover1.mp4",
+      "range": "bytes=0-63",
+      "status": 206,
+      "ms": 302,
+      "contentLength": 64,
+      "contentRange": "bytes 0-63/53847537",
+      "received": 64
+    },
+    {
+      "method": "HEAD",
+      "path": "/cover2.mp4",
+      "range": "",
+      "status": 200,
+      "ms": 410,
+      "contentLength": 9567837,
+      "contentRange": "",
+      "received": 0
+    },
+    {
+      "method": "GET",
+      "path": "/cover2.mp4",
+      "range": "bytes=0-63",
+      "status": 206,
+      "ms": 462,
+      "contentLength": 64,
+      "contentRange": "bytes 0-63/9567837",
+      "received": 64
+    },
+    {
+      "method": "HEAD",
+      "path": "/cover4.mp4",
+      "range": "",
+      "status": 200,
+      "ms": 430,
+      "contentLength": 15207075,
+      "contentRange": "",
+      "received": 0
+    },
+    {
+      "method": "GET",
+      "path": "/cover4.mp4",
+      "range": "bytes=0-63",
+      "status": 206,
+      "ms": 328,
+      "contentLength": 64,
+      "contentRange": "bytes 0-63/15207075",
+      "received": 64
+    },
+    {
+      "method": "HEAD",
+      "path": "/cover5.mp4",
+      "range": "",
+      "status": 200,
+      "ms": 413,
+      "contentLength": 66506817,
+      "contentRange": "",
+      "received": 0
+    },
+    {
+      "method": "GET",
+      "path": "/cover5.mp4",
+      "range": "bytes=0-63",
+      "status": 206,
+      "ms": 817,
+      "contentLength": 64,
+      "contentRange": "bytes 0-63/66506817",
+      "received": 64
+    },
+    {
+      "method": "HEAD",
+      "path": "/cover6.mp4",
+      "range": "",
+      "status": 200,
+      "ms": 179,
+      "contentLength": 16425451,
+      "contentRange": "",
+      "received": 0
+    },
+    {
+      "method": "GET",
+      "path": "/cover6.mp4",
+      "range": "bytes=0-63",
+      "status": 206,
+      "ms": 500,
+      "contentLength": 64,
+      "contentRange": "bytes 0-63/16425451",
+      "received": 64
+    },
+    {
+      "method": "HEAD",
+      "path": "/cover7.mp4",
+      "range": "",
+      "status": 200,
+      "ms": 364,
+      "contentLength": 28701111,
+      "contentRange": "",
+      "received": 0
+    },
+    {
+      "method": "GET",
+      "path": "/cover7.mp4",
+      "range": "bytes=0-63",
+      "status": 206,
+      "ms": 599,
+      "contentLength": 64,
+      "contentRange": "bytes 0-63/28701111",
+      "received": 64
+    },
+    {
+      "method": "HEAD",
+      "path": "/cover8.mp4",
+      "range": "",
+      "status": 200,
+      "ms": 151,
+      "contentLength": 15450398,
+      "contentRange": "",
+      "received": 0
+    },
+    {
+      "method": "GET",
+      "path": "/cover8.mp4",
+      "range": "bytes=0-63",
+      "status": 206,
+      "ms": 868,
+      "contentLength": 64,
+      "contentRange": "bytes 0-63/15450398",
+      "received": 64
+    },
+    {
+      "method": "HEAD",
+      "path": "/cover9.mp4",
+      "range": "",
+      "status": 200,
+      "ms": 152,
+      "contentLength": 29354099,
+      "contentRange": "",
+      "received": 0
+    },
+    {
+      "method": "GET",
+      "path": "/cover9.mp4",
+      "range": "bytes=0-63",
+      "status": 206,
+      "ms": 291,
+      "contentLength": 64,
+      "contentRange": "bytes 0-63/29354099",
+      "received": 64
+    },
+    {
+      "method": "HEAD",
+      "path": "/intro.mp4",
+      "range": "",
+      "status": 200,
+      "ms": 164,
+      "contentLength": 99825215,
+      "contentRange": "",
+      "received": 0
+    },
+    {
+      "method": "GET",
+      "path": "/intro.mp4",
+      "range": "bytes=0-63",
+      "status": 206,
+      "ms": 492,
+      "contentLength": 64,
+      "contentRange": "bytes 0-63/99825215",
+      "received": 64
+    },
+    {
+      "method": "GET",
+      "path": "/cover4.mp4",
+      "range": "bytes=-64",
+      "status": 206,
+      "ms": 807,
+      "contentLength": 64,
+      "contentRange": "bytes 15207011-15207074/15207075",
+      "received": 64
+    },
+    {
+      "method": "GET",
+      "path": "/intro.mp4",
+      "range": "bytes=-64",
+      "status": 206,
+      "ms": 321,
+      "contentLength": 64,
+      "contentRange": "bytes 99825151-99825214/99825215",
+      "received": 64
+    },
+    {
+      "method": "GET",
+      "path": "/intro.mp4",
+      "range": "bytes=999999999-",
+      "status": 416,
+      "ms": 107,
+      "contentLength": 18,
+      "contentRange": "bytes */99825215",
+      "received": 18
+    },
+    {
+      "method": "GET",
+      "path": "/intro.mp4",
+      "range": "bytes=0-2,8-10",
+      "status": 416,
+      "ms": 376,
+      "contentLength": 18,
+      "contentRange": "bytes */99825215",
+      "received": 18
+    },
+    {
+      "method": "GET",
+      "path": "/unlisted.mp4",
+      "range": "",
+      "status": 404,
+      "ms": 408,
+      "contentLength": 9,
+      "contentRange": "",
+      "received": 9
+    },
+    {
+      "method": "POST",
+      "path": "/intro.mp4",
+      "range": "",
+      "status": 405,
+      "ms": 406,
+      "contentLength": 18,
+      "contentRange": "",
+      "received": 18
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/intro.mp4",
+      "range": "",
+      "status": 204,
+      "ms": 118,
+      "contentLength": 0,
+      "contentRange": "",
+      "received": 0
+    },
+    {
+      "method": "GET",
+      "path": "/intro.mp4?bypass=1",
+      "range": "",
+      "status": 404,
+      "ms": 115,
+      "contentLength": 9,
+      "contentRange": "",
+      "received": 9
+    }
+  ]
+}

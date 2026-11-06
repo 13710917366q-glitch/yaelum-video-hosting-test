@@ -1,0 +1,47 @@
+[
+  {
+    "name": "cover1.mp4",
+    "bytes": 53847537,
+    "sha256": "8696b2bbaea6cb79994e024e8e60f19aacc0fb0a4c3698168b1fec24da8dd128"
+  },
+  {
+    "name": "cover2.mp4",
+    "bytes": 9567837,
+    "sha256": "47c3fc989d8f84836a448573c8dace593fa0c848a25cbf32fb87c9cd5f3d2db9"
+  },
+  {
+    "name": "cover4.mp4",
+    "bytes": 15207075,
+    "sha256": "b20c11d9eaee85151744661660d085188effafa71f5b1bf75c2248b3c00d3bb9"
+  },
+  {
+    "name": "cover5.mp4",
+    "bytes": 66506817,
+    "sha256": "b3dae287bb0b62a5dfe382fe96fd81cae217fa2975242ec917d738c6a1344f24"
+  },
+  {
+    "name": "cover6.mp4",
+    "bytes": 16425451,
+    "sha256": "69fd21ff6fbb6d1a684f5a35240b2142935ddf8e522265c37e8ae49628d90138"
+  },
+  {
+    "name": "cover7.mp4",
+    "bytes": 28701111,
+    "sha256": "0c90b07097834372edb1a93e8a279e0429fcd9f8c3b3dbde53347af2efb445ad"
+  },
+  {
+    "name": "cover8.mp4",
+    "bytes": 15450398,
+    "sha256": "3cd688d5f8167818b845fa3b3c2425dce43830d2c8de3704b6a6875169d6c3e4"
+  },
+  {
+    "name": "cover9.mp4",
+    "bytes": 29354099,
+    "sha256": "48a674af9b12623692710cfb913046d12a53a42c526e027d8b1f2b677683563e"
+  },
+  {
+    "name": "intro.mp4",
+    "bytes": 99825215,
+    "sha256": "883b9c98e2a69dc9fb097a087d854a1bce09d8ee2d03b44268ec1ce122f08503"
+  }
+]

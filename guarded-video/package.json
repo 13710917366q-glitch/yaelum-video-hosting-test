@@ -1,0 +1,6 @@
+{
+  "name": "yaelum-video-guard",
+  "private": true,
+  "type": "module",
+  "scripts": {"test": "node --test worker.test.mjs fallback.test.mjs"}
+}
