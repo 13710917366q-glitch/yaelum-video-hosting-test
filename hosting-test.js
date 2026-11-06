@@ -106,7 +106,7 @@
     const t0=performance.now();
     const video=document.createElement('video'); video.controls=true;video.playsInline=true;video.preload='none';video.dataset.hostingVideo='1';
     video.muted=params.get('auto')==='1';run.muted=video.muted;
-    video.src=source==='github'?new URL(`video/${files[p]}`,location.href).href:`${base}/${files[p]}`;
+    video.src=source==='github'?`https://13710917366q-glitch.github.io/yaelum-video-hosting-test/video/${files[p]}`:`${base}/${files[p]}`;
     let first=false,waiting=null,seekingAt=null,wasPlaying=false,seeking=false;
     function log(type){run.events.push({type,ms:Math.round(performance.now()-t0),at:Math.round(video.currentTime*1000)/1000});}
     function endWait(){if(waiting!==null){run.stallMs+=performance.now()-waiting;waiting=null;}}

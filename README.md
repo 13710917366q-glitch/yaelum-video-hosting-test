@@ -4,7 +4,12 @@
 
 ## 使用
 
-发布到独立GitHub Pages地址后，底部面板切换B站、GitHub Pages、R2。页面外观、作品封面、弹窗及现版B站地址保留。
+底部面板切换 B 站、GitHub Pages、R2。页面外观、作品封面、弹窗及现版 B 站地址保留。可用入口：
+
+- GitHub Pages：`https://13710917366q-glitch.github.io/yaelum-video-hosting-test/?source=r2`
+- Cloudflare 静态备用页：`https://yaelum-video-test.yaelum-video-guard.workers.dev/?source=r2`
+
+两者均已实际打开 R2 视频并确认 1920×1080。静态备用页不存储视频或绑定 R2 写权限，切换 GitHub 模式仍读取上述 GitHub Pages 的 MP4。
 
 - B站：现版iframe为基准。跨域播放器的首帧、缓冲、实际分辨率需单独检查；面板不将iframe加载时间当成视频首帧。
 - GitHub Pages：读取同目录video中的MP4。
